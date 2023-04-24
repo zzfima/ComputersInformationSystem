@@ -1,2 +1,2 @@
 # ComputersInformationSystem
-Discovery SW versions in network
+Computers Tools Information System.
