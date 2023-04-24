@@ -1,2 +1,2 @@
 # ComputersInformationSystem
-Computers Tools Information System.
+Computers Tools Information System for find versions
