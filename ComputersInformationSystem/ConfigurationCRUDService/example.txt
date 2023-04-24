@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "fromIPAddress": "127.0.0.1",
+    "toIPAddress": "127.0.0.33",
+    "userName": "xxx",
+    "password": "xxx",
+    "fwFileName": "\\c$\\Program Files\\xxx\\yyy\\zzz\\hhh.dll",
+    "phoenixFileName": "\\c$\\Program Files\\xxx\\yyy\\zzz\\hhh.dll",
+    "discoverFrequencyMinutes": 500,
+    "updateFrequencyMinutes": 30
+}
