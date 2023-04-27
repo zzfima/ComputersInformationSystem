@@ -37,6 +37,7 @@ if (app.Environment.IsDevelopment())
 #region Remote Machines
 //Get all remote machines
 app.MapGet("/remoteMachines", async (IRemoteMachineRepository repo) => await repo.GetRemoteMachinesAsync())
+    //.CacheOutput()
     .Produces<List<RemoteMachine>>(StatusCodes.Status200OK)
     .WithTags("GET");
 
