@@ -36,10 +36,16 @@
             return await toolsInformationCRUDServiceRead.GetResponse("http://localhost:5271/remoteMachines");
         }
 
-        public static async Task<string> PutRemoteMachine(RemoteMachine newRemoteMachine)
+        public static async Task<string> AddRemoteMachine(RemoteMachine newRemoteMachine)
         {
             IHttpResponseWrapper<RemoteMachine> toolsInformationCRUDServiceWrite = new HttpResponseWrapper<RemoteMachine>();
             return await toolsInformationCRUDServiceWrite.Post("http://localhost:5271/remoteMachines", newRemoteMachine);
+        }
+
+        public static async Task<string> ChangeRemoteMachine(RemoteMachine newRemoteMachine)
+        {
+            IHttpResponseWrapper<RemoteMachine> toolsInformationCRUDServiceWrite = new HttpResponseWrapper<RemoteMachine>();
+            return await toolsInformationCRUDServiceWrite.Put("http://localhost:5271/remoteMachines", newRemoteMachine);
         }
     }
 }

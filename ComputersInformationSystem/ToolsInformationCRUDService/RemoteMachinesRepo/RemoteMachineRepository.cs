@@ -26,7 +26,7 @@ public class RemoteMachineRepository : IRemoteMachineRepository
         foundRemoteMachine.IPAddress = newRemoteMachine.IPAddress;
         foundRemoteMachine.PhoenixVersion = newRemoteMachine.PhoenixVersion;
         foundRemoteMachine.FWVersion = newRemoteMachine.FWVersion;
-        foundRemoteMachine.LastCheck = newRemoteMachine.LastCheck;
+        foundRemoteMachine.LastUpdate = newRemoteMachine.LastUpdate;
 
         _dbContext.Update(foundRemoteMachine);
         await SaveAsync();

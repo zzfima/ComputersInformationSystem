@@ -4,6 +4,5 @@ public class RemoteMachine
     public string IPAddress { get; set; }= string.Empty;
     public string PhoenixVersion { get; set; } = string.Empty;
     public string FWVersion { get; set; } = string.Empty;
-    public DateTime LastCheck { get; set; }
-
+    public DateTime LastUpdate { get; set; }
 }

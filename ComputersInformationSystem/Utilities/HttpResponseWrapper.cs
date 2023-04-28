@@ -36,5 +36,22 @@ namespace Utilities
             }
             return "Not Created";
         }
+
+        public async Task<string> Put(string restApiAddress, T content)
+        {
+            var serializedContent = JsonConvert.SerializeObject(content);
+            StringContent httpContent = new StringContent(serializedContent, System.Text.Encoding.UTF8, "application/json");
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = await client.PutAsync(restApiAddress, httpContent))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                    {
+                        return "Created";
+                    }
+                }
+            }
+            return "Not Created";
+        }
     }
 }
