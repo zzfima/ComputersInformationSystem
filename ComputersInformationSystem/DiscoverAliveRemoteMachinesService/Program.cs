@@ -19,11 +19,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//get configuration
-IHttpResponseWrapper<IList<Configuration>> httpResponseConfiguration = new HttpResponseWrapper<IList<Configuration>>();
-var configs = await httpResponseConfiguration.GetResponse("http://localhost:5223/configurations");
-var config = configs.FirstOrDefault();
-
 #region Get
 //Get remote machines manually
 app.MapGet("/remoteMachines/{ipFrom}/{ipTo}", async (string ipFrom, string ipTo, IIpIterator ipIterator, IIpLiveFilter ipLiveFilter) =>
@@ -35,8 +30,11 @@ app.MapGet("/remoteMachines/{ipFrom}/{ipTo}", async (string ipFrom, string ipTo,
 //Get remote machines from configuration
 app.MapGet("/remoteConfiguredIpMachines", async (IIpIterator ipIterator, IIpLiveFilter ipLiveFilter) =>
 {
-    var fromIP = IPAddress.Parse(config?.FromIPAddress ?? "127.0.0.1");
-    var toIP = IPAddress.Parse(config?.ToIPAddress ?? "127.0.0.1");
+    var configurations = await RequestsWarpper.GetConfiguration();
+    var configuration = configurations.FirstOrDefault();
+
+    var fromIP = IPAddress.Parse(configuration?.FromIPAddress ?? "127.0.0.1");
+    var toIP = IPAddress.Parse(configuration?.ToIPAddress ?? "127.0.0.1");
     return await GetLiveIPs(ipIterator, ipLiveFilter, fromIP, toIP);
 })
     .WithTags("GET");

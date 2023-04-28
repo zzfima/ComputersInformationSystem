@@ -15,19 +15,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//get configuration
-IHttpResponseWrapper<IList<Configuration>> httpResponseConfiguration = new HttpResponseWrapper<IList<Configuration>>();
-var configs = await httpResponseConfiguration.GetResponse("http://localhost:5223/configurations");
-var config = configs.FirstOrDefault();
-
 #region Get
 //Get specific remote machine Phoenix Version by ip
 app.MapGet("/remoteMachinePhoenixVersion/{ip}", async (string ip) =>
 {
-    IVersionRetriver phnx = new VersionRetriver(config?.PhoenixFileName ?? "");
+    var configurations = await RequestsWarpper.GetConfiguration();
+    var configuration = configurations.FirstOrDefault();
+
+    IVersionRetriver phnx = new VersionRetriver(configuration?.PhoenixFileName ?? "");
     try
     {
-        var ver = await phnx.GetVersionByIp(IPAddress.Parse(ip), config.UserName, config.Password);
+        var ver = await phnx.GetVersionByIp(IPAddress.Parse(ip), configuration.UserName, configuration.Password);
         return Results.Ok(ver);
     }
     catch (Exception)
@@ -40,10 +38,13 @@ app.MapGet("/remoteMachinePhoenixVersion/{ip}", async (string ip) =>
 //Get specific remote machine FW Version by ip
 app.MapGet("/remoteMachineFWVersion/{ip}", async (string ip) =>
 {
-    IVersionRetriver phnx = new VersionRetriver(config?.FWFileName ?? "");
+    var configurations = await RequestsWarpper.GetConfiguration();
+    var configuration = configurations.FirstOrDefault();
+
+    IVersionRetriver phnx = new VersionRetriver(configuration?.FWFileName ?? "");
     try
     {
-        var ver = await phnx.GetVersionByIp(IPAddress.Parse(ip), config.UserName, config.Password);
+        var ver = await phnx.GetVersionByIp(IPAddress.Parse(ip), configuration.UserName, configuration.Password);
         return Results.Ok(ver);
     }
     catch (Exception)

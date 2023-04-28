@@ -1,5 +1,3 @@
-using Utilities;
-
 var builder = WebApplication.CreateBuilder(args);
 
 //add swagger
@@ -19,18 +17,18 @@ if (app.Environment.IsDevelopment())
 #region Post
 app.MapPost("/startScheduling", async () =>
 {
-    IList<string>? aliveRemoteMachines = await GetAliveMachines();
-    var existingCRUDRemoteMachines = await GetExistingCRUDRemoteMachines();
+    IList<string>? aliveRemoteMachines = await RequestsWarpper.GetAliveMachines();
+    var existingCRUDRemoteMachines = await RequestsWarpper.GetExistingCRUDRemoteMachines();
 
     foreach (var remoteConfiguredIpMachine in aliveRemoteMachines)
     {
         ThreadPool.QueueUserWorkItem(async (a) =>
         {
-            var phoenixVersion = await GetPhoenixVersion(remoteConfiguredIpMachine);
+            var phoenixVersion = await RequestsWarpper.GetPhoenixVersion(remoteConfiguredIpMachine);
             if (phoenixVersion == null)
                 return;
 
-            var fwVersion = await GetFWVersion(remoteConfiguredIpMachine);
+            var fwVersion = await RequestsWarpper.GetFWVersion(remoteConfiguredIpMachine);
             if (fwVersion == null)
                 return;
 
@@ -44,7 +42,7 @@ app.MapPost("/startScheduling", async () =>
                     LastCheck = DateTime.Now
                 };
 
-                await PutRemoteMachine(newRemoteMachine);
+                await RequestsWarpper.PutRemoteMachine(newRemoteMachine);
             }
         });
     }
@@ -65,44 +63,3 @@ app.MapPost("/stopScheduling", () =>
 
 app.Run();
 app.UseHttpsRedirection();
-
-static async Task<Configuration> GetConfiguration()
-{
-    IHttpResponseWrapper<IList<Configuration>> httpResponseConfiguration = new HttpResponseWrapper<IList<Configuration>>();
-    var configs = await httpResponseConfiguration.GetResponse("http://localhost:5223/configurations");
-    return configs.FirstOrDefault();
-}
-
-static async Task<IList<string>> GetAliveMachines()
-{
-    var configuration = await GetConfiguration();
-    IHttpResponseWrapper<IList<string>> httpResponseAliveRemoteMachines = new HttpResponseWrapper<IList<string>>();
-    return await httpResponseAliveRemoteMachines.GetResponse($"http://localhost:5084/remoteMachines/{configuration.FromIPAddress}/{configuration.ToIPAddress}");
-}
-
-static async Task<string> GetPhoenixVersion(string remoteConfiguredIpMachine)
-{
-    IHttpResponseWrapper<string> remoteMachineVersionInfoService = new HttpResponseWrapper<string>();
-    var phoenixVersionRestApi = $"http://localhost:5218/remoteMachinePhoenixVersion/{remoteConfiguredIpMachine}";
-    return await remoteMachineVersionInfoService.GetResponse(phoenixVersionRestApi);
-}
-
-static async Task<string> GetFWVersion(string remoteConfiguredIpMachine)
-{
-    IHttpResponseWrapper<string> remoteMachineVersionInfoService = new HttpResponseWrapper<string>();
-    var phoenixVersionRestApi = $"http://localhost:5218/remoteMachineFWVersion/{remoteConfiguredIpMachine}";
-    return await remoteMachineVersionInfoService.GetResponse(phoenixVersionRestApi);
-}
-
-static async Task<List<RemoteMachine>> GetExistingCRUDRemoteMachines()
-{
-    IHttpResponseWrapper<List<RemoteMachine>> toolsInformationCRUDServiceRead = new HttpResponseWrapper<List<RemoteMachine>>();
-    return await toolsInformationCRUDServiceRead.GetResponse("http://localhost:5271/remoteMachines");
-}
-
-
-static async Task<string> PutRemoteMachine(RemoteMachine newRemoteMachine)
-{
-    IHttpResponseWrapper<RemoteMachine> toolsInformationCRUDServiceWrite = new HttpResponseWrapper<RemoteMachine>();
-    return await toolsInformationCRUDServiceWrite.Post("http://localhost:5271/remoteMachines", newRemoteMachine);
-}
