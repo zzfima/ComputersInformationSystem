@@ -26,25 +26,7 @@ app.MapGet("/remoteMachines/{ipFrom}/{ipTo}", async (string ipFrom, string ipTo,
     return await GetLiveIPs(ipIterator, ipLiveFilter, IPAddress.Parse(ipFrom), IPAddress.Parse(ipTo));
 })
     .WithTags("GET");
-
-//Get remote machines from configuration
-app.MapGet("/remoteConfiguredIpMachines", async (IIpIterator ipIterator, IIpLiveFilter ipLiveFilter) =>
-{
-    var configurations = await RequestsWarpper.GetConfiguration();
-    var configuration = configurations.FirstOrDefault();
-
-    var fromIP = IPAddress.Parse(configuration?.FromIPAddress ?? "127.0.0.1");
-    var toIP = IPAddress.Parse(configuration?.ToIPAddress ?? "127.0.0.1");
-    return await GetLiveIPs(ipIterator, ipLiveFilter, fromIP, toIP);
-})
-    .WithTags("GET");
 #endregion
-
-
-app.Run();
-
-//add HTTPS
-app.UseHttpsRedirection();
 
 static async Task<IResult> GetLiveIPs(IIpIterator ipIterator, IIpLiveFilter ipLiveFilter, IPAddress fromIP, IPAddress toIP)
 {
@@ -53,3 +35,6 @@ static async Task<IResult> GetLiveIPs(IIpIterator ipIterator, IIpLiveFilter ipLi
     var liveIPsAsStrings = liveIPs.Select(ip => ip.ToString()).ToArray();
     return liveIPsAsStrings.Length > 0 ? Results.Ok(liveIPsAsStrings) : Results.NotFound();
 }
+
+app.Run();
+app.UseHttpsRedirection();

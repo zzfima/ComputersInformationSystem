@@ -1,31 +1,35 @@
-var builder = WebApplication.CreateBuilder(args);
+var _builder = WebApplication.CreateBuilder(args);
 
 //add swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+_builder.Services.AddEndpointsApiExplorer();
+_builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+var _app = _builder.Build();
 
 //while development ensure db scheme created while app started
-if (app.Environment.IsDevelopment())
+if (_app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    _app.UseSwagger();
+    _app.UseSwaggerUI();
 }
 
-Timer updateTimer = null;
-Timer discoverTimer = null;
+Timer? _updateTimer = null;
+Timer? _discoverTimer = null;
 
 #region Post
-app.MapPost("/startScheduling", async () =>
+_app.MapPost("/startScheduling", async () =>
 {
+    //if already started - return error
+    if (_updateTimer != null || _discoverTimer != null)
+        return Results.BadRequest("Scheduling ALREADY started");
+
     var configurations = await RequestsWarpper.GetConfiguration();
     var configuration = configurations.FirstOrDefault();
     var discoverFrequencyMinutes = configuration.DiscoverFrequencyMinutes;
     var updateFrequencyMinutes = configuration.UpdateFrequencyMinutes;
 
-    updateTimer = new Timer(UpdateMachines, null, 1000, updateFrequencyMinutes * 60 * 1000);
-    discoverTimer = new Timer(DiscoverMachines, null, 1000, discoverFrequencyMinutes * 60 * 1000);
+    _updateTimer = new Timer(UpdateMachines, null, 1000, updateFrequencyMinutes * 60 * 1000);
+    _discoverTimer = new Timer(DiscoverMachines, null, 1000, discoverFrequencyMinutes * 60 * 1000);
 
     return Results.Created("Scheduling Started", "Scheduling started");
 })
@@ -38,23 +42,36 @@ void DiscoverMachines(object? state)
         IList<string>? aliveRemoteMachines = await RequestsWarpper.GetAliveMachines();
         var existingCRUDRemoteMachines = await RequestsWarpper.GetExistingCRUDRemoteMachines();
 
-        foreach (var remoteConfiguredIpMachine in aliveRemoteMachines)
+        foreach (var aliveRemoteMachine in aliveRemoteMachines)
         {
             ThreadPool.QueueUserWorkItem(async (a) =>
             {
-                var phoenixVersion = await RequestsWarpper.GetPhoenixVersion(remoteConfiguredIpMachine);
+                var existingRemoteMachine = existingCRUDRemoteMachines.Find(r => r.IPAddress == aliveRemoteMachine);
+
+                var phoenixVersion = await RequestsWarpper.GetPhoenixVersion(aliveRemoteMachine);
                 if (phoenixVersion == null)
+                {
+                    //If Existing machine - Remove from to Tools Information
+                    if (existingRemoteMachine != null)
+                        await RequestsWarpper.RemoveRemoteMachine(existingRemoteMachine);
                     return;
+                }
 
-                var fwVersion = await RequestsWarpper.GetFWVersion(remoteConfiguredIpMachine);
+                var fwVersion = await RequestsWarpper.GetFWVersion(aliveRemoteMachine);
                 if (fwVersion == null)
+                {
+                    //If Existing machine - Remove from to Tools Information
+                    if (existingRemoteMachine != null)
+                        await RequestsWarpper.RemoveRemoteMachine(existingRemoteMachine);
                     return;
+                }
 
-                if (existingCRUDRemoteMachines.Find(r => r.IPAddress == remoteConfiguredIpMachine) == null)
+                //New machine. Add to Tools Information
+                if (existingRemoteMachine == null)
                 {
                     var newRemoteMachine = new RemoteMachine
                     {
-                        IPAddress = remoteConfiguredIpMachine,
+                        IPAddress = aliveRemoteMachine,
                         FWVersion = fwVersion,
                         PhoenixVersion = phoenixVersion,
                         LastUpdate = DateTime.Now
@@ -77,10 +94,6 @@ void UpdateMachines(object? state)
         {
             ThreadPool.QueueUserWorkItem(async (a) =>
             {
-                var remoteMachine = existingCRUDRemoteMachines.Find(r => r.IPAddress == existingCRUDRemoteMachine.IPAddress);
-                if (remoteMachine == null)
-                    return;
-
                 var phoenixVersion = await RequestsWarpper.GetPhoenixVersion(existingCRUDRemoteMachine.IPAddress);
                 if (phoenixVersion == null)
                     return;
@@ -89,23 +102,30 @@ void UpdateMachines(object? state)
                 if (fwVersion == null)
                     return;
 
-                remoteMachine.FWVersion = fwVersion;
-                remoteMachine.PhoenixVersion = phoenixVersion;
-                remoteMachine.LastUpdate = DateTime.Now;
+                existingCRUDRemoteMachine.FWVersion = fwVersion;
+                existingCRUDRemoteMachine.PhoenixVersion = phoenixVersion;
+                existingCRUDRemoteMachine.LastUpdate = DateTime.Now;
 
-                await RequestsWarpper.ChangeRemoteMachine(remoteMachine);
+                await RequestsWarpper.ChangeRemoteMachine(existingCRUDRemoteMachine);
             });
         }
     });
 }
 
-app.MapPost("/stopScheduling", () =>
+_app.MapPost("/stopScheduling", () =>
 {
-    discoverTimer?.Change(Timeout.Infinite, Timeout.Infinite);
-    updateTimer?.Change(Timeout.Infinite, Timeout.Infinite);
+    //if already stopped - return error
+    if (_updateTimer == null || _discoverTimer == null)
+        return Results.BadRequest("Scheduling ALREADY stopped");
 
-    discoverTimer?.Dispose();
-    updateTimer?.Dispose();
+    _discoverTimer?.Change(Timeout.Infinite, Timeout.Infinite);
+    _updateTimer?.Change(Timeout.Infinite, Timeout.Infinite);
+
+    _discoverTimer?.Dispose();
+    _updateTimer?.Dispose();
+
+    _discoverTimer = null;
+    _updateTimer = null;
 
     return Results.Created("Scheduling stopped", "Scheduling stopped");
 })
@@ -113,5 +133,5 @@ app.MapPost("/stopScheduling", () =>
 
 #endregion
 
-app.Run();
-app.UseHttpsRedirection();
+_app.Run();
+_app.UseHttpsRedirection();

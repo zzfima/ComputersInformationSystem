@@ -4,7 +4,7 @@ namespace Utilities
 {
     public class HttpResponseWrapper<T> : IHttpResponseWrapper<T>
     {
-        public async Task<T> GetResponse(string restApiAddress)
+        public async Task<T> Get(string restApiAddress)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -52,6 +52,21 @@ namespace Utilities
                 }
             }
             return "Not Created";
+        }
+
+        public async Task<string> Delete(string restApiAddress)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = await client.DeleteAsync(restApiAddress))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        return "Deleted";
+                    }
+                }
+            }
+            return "Not Deleted";
         }
     }
 }

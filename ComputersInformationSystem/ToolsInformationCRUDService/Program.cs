@@ -56,7 +56,7 @@ app.MapPost("/remoteMachines", async ([FromBody] RemoteMachine remoteMachine, IR
     .WithTags("POST");
 
 //Delete specific Remote Machine
-app.MapDelete("/remoteMachines{id}", async (int id, IRemoteMachineRepository repo) =>
+app.MapDelete("/remoteMachines/{id}", async (int id, IRemoteMachineRepository repo) =>
 {
     await repo.DeleteRemoteMachineAsync(id);
     await repo.SaveAsync();
