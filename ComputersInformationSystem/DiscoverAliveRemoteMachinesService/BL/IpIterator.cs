@@ -5,7 +5,7 @@
         List<IPAddress> ipAddressList = new List<IPAddress>();
         IPAddress currentIp = startIp;
 
-        while (currentIp.Address.CompareTo(endIp.Address) <= 0)
+        do
         {
             ipAddressList.Add(currentIp);
             byte[] bytes = currentIp.GetAddressBytes();
@@ -25,6 +25,7 @@
 
             currentIp = new IPAddress(bytes);
         }
+        while (!currentIp.Equals(endIp));
 
         return ipAddressList;
     }

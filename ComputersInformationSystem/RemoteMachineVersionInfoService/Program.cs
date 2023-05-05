@@ -1,31 +1,33 @@
 using Utilities;
 
-var builder = WebApplication.CreateBuilder(args);
+var configurations = await ConfigurationWarpper.GetConfiguration();
+var _configuration = configurations.FirstOrDefault();
+if (_configuration == null)
+    throw new Exception("Configuration not found");
+
+var _builder = WebApplication.CreateBuilder(args);
 
 //add swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+_builder.Services.AddEndpointsApiExplorer();
+_builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+var _app = _builder.Build();
 
 //while development ensure db scheme created while app started
-if (app.Environment.IsDevelopment())
+if (_app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    _app.UseSwagger();
+    _app.UseSwaggerUI();
 }
 
-#region Get
+#region REST API
 //Get specific remote machine Phoenix Version by ip
-app.MapGet("/remoteMachinePhoenixVersion/{ip}", async (string ip) =>
+_app.MapGet("/remoteMachinePhoenixVersion/{ip}", async (string ip) =>
 {
-    var configurations = await RequestsWarpper.GetConfiguration();
-    var configuration = configurations.FirstOrDefault();
-
-    IVersionRetriver phnx = new VersionRetriver(configuration?.PhoenixFileName ?? "");
+    IVersionRetriver phnx = new VersionRetriver(_configuration.PhoenixFileName);
     try
     {
-        var ver = await phnx.GetVersionByIp(IPAddress.Parse(ip), configuration.UserName, configuration.Password);
+        var ver = await phnx.GetVersionByIp(IPAddress.Parse(ip), _configuration?.UserName, _configuration?.Password);
         return Results.Ok(ver);
     }
     catch (Exception)
@@ -36,15 +38,12 @@ app.MapGet("/remoteMachinePhoenixVersion/{ip}", async (string ip) =>
     .WithTags("GET");
 
 //Get specific remote machine FW Version by ip
-app.MapGet("/remoteMachineFWVersion/{ip}", async (string ip) =>
+_app.MapGet("/remoteMachineFWVersion/{ip}", async (string ip) =>
 {
-    var configurations = await RequestsWarpper.GetConfiguration();
-    var configuration = configurations.FirstOrDefault();
-
-    IVersionRetriver phnx = new VersionRetriver(configuration?.FWFileName ?? "");
+    IVersionRetriver phnx = new VersionRetriver(_configuration.FWFileName);
     try
     {
-        var ver = await phnx.GetVersionByIp(IPAddress.Parse(ip), configuration.UserName, configuration.Password);
+        var ver = await phnx.GetVersionByIp(IPAddress.Parse(ip), _configuration.UserName, _configuration.Password);
         return Results.Ok(ver);
     }
     catch (Exception)
@@ -55,5 +54,5 @@ app.MapGet("/remoteMachineFWVersion/{ip}", async (string ip) =>
     .WithTags("GET");
 #endregion
 
-app.Run();
-app.UseHttpsRedirection();
+_app.Run(_configuration?.RemoteMachineVersionInfoServiceURL);
+_app.UseHttpsRedirection();

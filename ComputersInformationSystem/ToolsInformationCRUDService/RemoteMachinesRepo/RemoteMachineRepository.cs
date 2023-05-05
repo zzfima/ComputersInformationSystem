@@ -34,10 +34,10 @@ public class RemoteMachineRepository : IRemoteMachineRepository
 
     public async Task DeleteRemoteMachineAsync(int id)
     {
-        var foundRemoteMachine = await _dbContext.RemoteMachines.FindAsync(new object[] { id });
-        if (foundRemoteMachine == null)
+        var remoteMachineToDelete = await _dbContext.RemoteMachines.FindAsync(new object[] { id });
+        if (remoteMachineToDelete == null)
             return;
-        _dbContext.Remove(foundRemoteMachine);
+        _dbContext.Remove(remoteMachineToDelete);
         await SaveAsync();
     }
 

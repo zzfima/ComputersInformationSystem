@@ -7,5 +7,10 @@
     "fwFileName": "\\c$\\Program Files\\Halo 3\\SC_DLL.dll",
     "phoenixFileName": "\\c$\\Program Files\\Halo 3\\steam_api64.dll",
     "discoverFrequencyMinutes": 500,
-    "updateFrequencyMinutes": 30
+    "updateFrequencyMinutes": 30,
+    "configurationCRUDServiceURL": "http://localhost:5213/",
+    "discoverAliveRemoteMachinesServiceURL": "http://localhost:5223/",
+    "remoteMachineVersionInfoServiceURL": "http://localhost:5233/",
+    "toolsInformationCRUDServiceURL": "http://localhost:5243/",
+    "toolsInformationSystemSchedulerURL": "http://localhost:5253/",
 }

@@ -30,11 +30,11 @@ namespace Utilities
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.Created)
                     {
-                        return "Created";
+                        return "Posted";
                     }
                 }
             }
-            return "Not Created";
+            return "Not Posted";
         }
 
         public async Task<string> Put(string restApiAddress, T content)
@@ -47,11 +47,11 @@ namespace Utilities
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.Created)
                     {
-                        return "Created";
+                        return "Put";
                     }
                 }
             }
-            return "Not Created";
+            return "Not Put";
         }
 
         public async Task<string> Delete(string restApiAddress)

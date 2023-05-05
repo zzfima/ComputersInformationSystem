@@ -23,6 +23,16 @@ public class ConfigurationRepository : IConfigurationRepository
         foundConfiguration.FWFileName = newConfiguration.FWFileName;
         foundConfiguration.UserName = newConfiguration.UserName;
         foundConfiguration.Password = newConfiguration.Password;
+        foundConfiguration.ConfigurationCRUDServiceURL = newConfiguration.ConfigurationCRUDServiceURL;
+        foundConfiguration.DiscoverAliveRemoteMachinesServiceURL = newConfiguration.DiscoverAliveRemoteMachinesServiceURL;
+        foundConfiguration.RemoteMachineVersionInfoServiceURL = newConfiguration.RemoteMachineVersionInfoServiceURL;
+        foundConfiguration.ToolsInformationCRUDServiceURL = newConfiguration.ToolsInformationCRUDServiceURL;
+        foundConfiguration.MessageQueueServiceURL = newConfiguration.MessageQueueServiceURL;
+        foundConfiguration.MessageQueueHostName = newConfiguration.MessageQueueHostName;
+        foundConfiguration.MessageQueuePassword = newConfiguration.MessageQueuePassword;
+        foundConfiguration.MessageQueueUserName = newConfiguration.MessageQueueUserName;
+        foundConfiguration.MessageQueueServiceURL = newConfiguration.MessageQueueServiceURL;
+        foundConfiguration.MessageQueueRoutingKey = newConfiguration.MessageQueueRoutingKey;
 
         _dbContext.Update(foundConfiguration);
         await SaveAsync();
@@ -37,6 +47,15 @@ public class ConfigurationRepository : IConfigurationRepository
     public async Task SaveAsync()
     {
         await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task DeleteConfigurationAsync(int id)
+    {
+        var configurationToDelete = await _dbContext.Configurations.FindAsync(new object[] { id });
+        if (configurationToDelete == null)
+            return;
+        _dbContext.Remove(configurationToDelete);
+        await SaveAsync();
     }
 
     public async void Dispose()

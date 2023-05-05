@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConfigurationCRUDService\ConfigurationCRUDService.csproj" />
-    <ProjectReference Include="..\ToolsInformationCRUDService\ToolsInformationCRUDService.csproj" />
   </ItemGroup>
 
 </Project>

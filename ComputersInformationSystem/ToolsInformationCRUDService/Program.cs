@@ -1,20 +1,27 @@
 
-var builder = WebApplication.CreateBuilder(args);
+using Utilities;
+
+var configurations = await ConfigurationWarpper.GetConfiguration();
+var _configuration = configurations.FirstOrDefault();
+if (_configuration == null)
+    throw new Exception("Configuration not found");
+
+var _builder = WebApplication.CreateBuilder(args);
 
 //add data context
-builder.Services.AddDbContext<RemoteMachineDB>(options =>
+_builder.Services.AddDbContext<RemoteMachineDB>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("SqliteRemotMachines"));
+    options.UseSqlite(_builder.Configuration.GetConnectionString("SqliteRemotMachines"));
 });
 
 //add repository service
-builder.Services.AddScoped<IRemoteMachineRepository, RemoteMachineRepository>();
+_builder.Services.AddScoped<IRemoteMachineRepository, RemoteMachineRepository>();
 
 //add swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+_builder.Services.AddEndpointsApiExplorer();
+_builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+var _app = _builder.Build();
 
 //example usage DI
 //using (var serviceScope = app.Services.CreateScope())
@@ -25,54 +32,64 @@ var app = builder.Build();
 //}
 
 //while development ensure db scheme created while app started
-if (app.Environment.IsDevelopment())
+if (_app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    using var scope = app.Services.CreateScope();
+    _app.UseSwagger();
+    _app.UseSwaggerUI();
+    using var scope = _app.Services.CreateScope();
     var dbService = scope.ServiceProvider.GetRequiredService<RemoteMachineDB>();
     dbService.Database.EnsureCreated();
 }
 
-#region Remote Machines
+#region REST API
 //Get all remote machines
-app.MapGet("/remoteMachines", async (IRemoteMachineRepository repo) => await repo.GetRemoteMachinesAsync())
+_app.MapGet("/remoteMachines", async (IRemoteMachineRepository repo) => await repo.GetRemoteMachinesAsync())
     //.CacheOutput()
     .Produces<List<RemoteMachine>>(StatusCodes.Status200OK)
     .WithTags("GET");
 
 //Get specific remote machine by id
-app.MapGet("/remoteMachines/{id}", async (int id, IRemoteMachineRepository repo) =>
-    await repo.GetRemoteMachineAsync(id) is RemoteMachine remoteMachine ? Results.Ok(remoteMachine) : Results.NotFound())
+_app.MapGet("/remoteMachine/{id}", async (int id, IRemoteMachineRepository repo) =>
+{
+    try
+    {
+        RemoteMachine? remoteMachine = await repo.GetRemoteMachineAsync(id);
+        return Results.Ok(remoteMachine);
+    }
+    catch (InvalidOperationException)
+    {
+        return Results.NotFound();
+    }
+})
     .WithTags("GET");
 
 //Add Remote Machine
-app.MapPost("/remoteMachines", async ([FromBody] RemoteMachine remoteMachine, IRemoteMachineRepository repo) =>
+_app.MapPost("/remoteMachine", async ([FromBody] RemoteMachine remoteMachine, IRemoteMachineRepository repo) =>
 {
     await repo.InsertRemoteMachineAsync(remoteMachine);
     await repo.SaveAsync();
-    return Results.Created($"/remoteMachines{remoteMachine.Id}", remoteMachine);
+    return Results.Created($"/remoteMachine ID: {remoteMachine.Id} success POST", remoteMachine);
 })
     .WithTags("POST");
 
 //Delete specific Remote Machine
-app.MapDelete("/remoteMachines/{id}", async (int id, IRemoteMachineRepository repo) =>
+_app.MapDelete("/remoteMachine/{id}", async (int id, IRemoteMachineRepository repo) =>
 {
     await repo.DeleteRemoteMachineAsync(id);
     await repo.SaveAsync();
-    return Results.NoContent();
+    return Results.Accepted($"remoteMachine ID: {id} success DELETE", id);
 })
     .WithTags("DELETE");
 
 //Update specific Remote Machine, id shall be same
-app.MapPut("/remoteMachines", async ([FromBody] RemoteMachine remoteMachine, IRemoteMachineRepository repo) =>
+_app.MapPut("/remoteMachine", async ([FromBody] RemoteMachine remoteMachine, IRemoteMachineRepository repo) =>
 {
     await repo.UpdateRemoteMachineAsync(remoteMachine);
     await repo.SaveAsync();
-    return Results.NoContent();
+    return Results.Created($"/remoteMachine ID: {remoteMachine.Id} success PUT", remoteMachine);
 })
     .WithTags("PUT");
 #endregion
 
-app.Run();
-app.UseHttpsRedirection();
+_app.Run(_configuration?.ToolsInformationCRUDServiceURL);
+_app.UseHttpsRedirection();

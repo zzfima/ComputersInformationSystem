@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteMachineVersionInfoSer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsInformationCRUDService", "ToolsInformationCRUDService\ToolsInformationCRUDService.csproj", "{FB8AB505-ACCF-4384-98D8-514E692F84F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsInformationSystemScheduler", "ToolsInformationSystemScheduler\ToolsInformationSystemScheduler.csproj", "{55470DD2-9A6C-4252-9CAA-7D7067B3480D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsInformationSystemSchedulerService", "ToolsInformationSystemScheduler\ToolsInformationSystemSchedulerService.csproj", "{55470DD2-9A6C-4252-9CAA-7D7067B3480D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueueService", "MessageQueueService\MessageQueueService.csproj", "{09E88017-8C83-4AB7-B652-251F91A62F2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{55470DD2-9A6C-4252-9CAA-7D7067B3480D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55470DD2-9A6C-4252-9CAA-7D7067B3480D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55470DD2-9A6C-4252-9CAA-7D7067B3480D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09E88017-8C83-4AB7-B652-251F91A62F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09E88017-8C83-4AB7-B652-251F91A62F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09E88017-8C83-4AB7-B652-251F91A62F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09E88017-8C83-4AB7-B652-251F91A62F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
