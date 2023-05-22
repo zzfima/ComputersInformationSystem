@@ -2,7 +2,7 @@
 
 namespace Utilities
 {
-    public class HttpResponseWrapper<T> : IHttpResponseWrapper<T>
+    internal class HttpResponseWrapper<T> : IHttpResponseWrapper<T>
     {
         public async Task<T> Get(string restApiAddress)
         {

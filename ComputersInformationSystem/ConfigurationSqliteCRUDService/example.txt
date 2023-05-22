@@ -1,0 +1,15 @@
+{
+    "id": 1,
+    "fromIPAddress": "127.0.0.1",
+    "toIPAddress": "127.0.0.33",
+    "userName": "xxx",
+    "password": "xxx",
+    "fwFileName": "\\c$\\Program Files\\Halo 3\\SC_DLL.dll",
+    "phoenixFileName": "\\c$\\Program Files\\Halo 3\\steam_api64.dll",
+    "discoverFrequencyMinutes": 500,
+    "updateFrequencyMinutes": 30,
+    "configurationSqliteCRUDServiceURL": "http://localhost:5213/",
+    "remoteMachineVersionInfoServiceURL": "http://localhost:5233/",
+    "toolsInformationSqliteCRUDServiceURL": "http://localhost:5243/",
+    "toolsInformationSystemSchedulerURL": "http://localhost:5253/",
+}
