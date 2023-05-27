@@ -5,8 +5,6 @@ public class Configuration
     public string ToIPAddress { get; set; } = string.Empty;
     public string UserName { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
-    public string FWFileName { get; set; } = string.Empty;
-    public string PhoenixFileName { get; set; } = string.Empty;
     public int DiscoverFrequencyMinutes { get; set; }
     public int UpdateFrequencyMinutes { get; set; }
     public bool IsToDeleteDeathRemoteMachine { get; set; }

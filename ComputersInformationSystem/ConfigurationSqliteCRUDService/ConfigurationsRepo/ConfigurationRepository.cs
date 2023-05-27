@@ -24,8 +24,6 @@ public class ConfigurationRepository : IConfigurationRepository
         oldCnfg.ToIPAddress = newCnfg.ToIPAddress;
         oldCnfg.DiscoverFrequencyMinutes = newCnfg.DiscoverFrequencyMinutes;
         oldCnfg.UpdateFrequencyMinutes = newCnfg.UpdateFrequencyMinutes;
-        oldCnfg.PhoenixFileName = newCnfg.PhoenixFileName;
-        oldCnfg.FWFileName = newCnfg.FWFileName;
         oldCnfg.UserName = newCnfg.UserName;
         oldCnfg.Password = newCnfg.Password;
         oldCnfg.ConfigurationSqliteCRUDServiceURL = newCnfg.ConfigurationSqliteCRUDServiceURL;
