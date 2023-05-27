@@ -7,10 +7,15 @@ public class ConfigurationRepository : IConfigurationRepository
         _dbContext = hdb;
     }
 
-    public async Task<IList<Configuration>> GetConfigurationsAsync() => await _dbContext.Configurations.ToListAsync();
+    public async Task<IList<Configuration>> GetConfigurationsAsync()
+    {
+        _dbContext.Configurations.Include(iv => iv.InstalledVersions).ToList(); //Lazy loading
+        return await _dbContext.Configurations.ToListAsync();
+    }
 
     public async Task UpdateConfigurationAsync(Configuration newCnfg)
     {
+         _dbContext.Configurations.Include(iv => iv.InstalledVersions).ToList(); //Lazy loading
         var oldCnfg = await _dbContext.Configurations.FindAsync(new object[] { newCnfg.Id });
         if (oldCnfg == null)
             return;
@@ -49,6 +54,8 @@ public class ConfigurationRepository : IConfigurationRepository
 
         oldCnfg.ElasticHostName = newCnfg.ElasticHostName;
         oldCnfg.ElasticIndexName = newCnfg.ElasticIndexName;
+
+        oldCnfg.InstalledVersions = newCnfg.InstalledVersions;
 
         _dbContext.Update(oldCnfg);
         await SaveAsync();

@@ -11,6 +11,8 @@ public class Configuration
     public int UpdateFrequencyMinutes { get; set; }
     public bool IsToDeleteDeathRemoteMachine { get; set; }
 
+    public ICollection<InstalledVersion> InstalledVersions { get; set; } = new List<InstalledVersion>();
+
     public string ConfigurationSqliteCRUDServiceURL { get; set; } = string.Empty;
     public string RemoteMachinesSqliteCRUDServiceURL { get; set; } = string.Empty;
     public string ToolsInformationSystemSchedulerServiceURL { get; set; } = string.Empty;
