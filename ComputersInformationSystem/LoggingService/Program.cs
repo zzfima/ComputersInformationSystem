@@ -1,9 +1,6 @@
 using LoggingService.BL;
 using Utilities;
 
-//LOGGER: KLA.Infrastructure.KLogger
-//Problem use : http://kla-cpg-nuget:8088/nuget
-
 var configurations = await RESTAPIWrapper.GetConfigurationAsync();
 var _configuration = configurations.FirstOrDefault();
 if (_configuration == null)
