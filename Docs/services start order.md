@@ -10,6 +10,7 @@
 
 ### Data Tier services:
 1. ConfigurationSqliteCRUDService
+1. LoggingService
 1. RemoteMachinesNeo4jCRUDService
 1. RemoteMachinesSQLiteCRUDService
 1. IPsSQLiteCRUDService
