@@ -1,5 +1,5 @@
-# ComputersInformationSystem
-Computers Tools Information System - scalable solution for discovering versions on remote computers
+# Computers Information System
+Scalable solution for discovering versions on remote computers
 
 ![image](https://github.com/zzfima/ComputersInformationSystem/assets/7007970/baf0ecc3-e9bf-4ea2-b1df-b086a142afee)
 
