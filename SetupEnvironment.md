@@ -22,3 +22,60 @@
         1. transport.tcp.port: 9300 
         1. http.port: 9200
         1. network.host: 0.0.0.0
+
+Setup config file through ConfigurationSqliteCRUDService http://localhost:5200/swagger/index.html :
+
+    "id"                            //any number
+    "fromIPAddress"                 //start address for scanning. For example "192.168.1.10"
+    "toIPAddress"                   //end address for scanning. For example "192.168.1.15"
+    "userName"                      //remote PC user name. For example "admin"
+    "password"                      //remote PC password. For example "1234qwer"
+    "discoverFrequencyMinutes"      //Discovery frequency. Checking from the very beginning all IP addresses. For example 500
+    "updateFrequencyMinutes"        //Discovery frequency. Checking only live IP addresses. For example 30
+    "isToDeleteDeathRemoteMachine"  //If dead IP machine shall be deleted from DB
+    
+    "configurationSqliteCRUDServiceURL"     //Address of Configuration SQlite CRUD Service. For example "http://localhost:5200/"
+    "remoteMachinesSqliteCRUDServiceURL"    //Address of Remote Machines SQlite CRUD Service. For example "http://localhost:5201/"
+    "remoteMachinesNeo4jCRUDServiceURL"     //Address of Neo4J CRUD Service. For example "http://localhost:5202/"
+    "iPsSqliteCRUDServiceURL"               //Address of IP SQlite CRUD Service. For example "http://localhost:5203"
+    
+    "mqVersionGatherProducerServiceURL"    //Address of producer service VersionGather. For example "http://localhost:5210/"
+    "mqAliveIPGatherProducerServiceURL"    //Address of producer service IP Gather. For example "http://localhost:5211/"
+
+    "toolsInformationSystemSchedulerServiceURL"    //Address of Scheduler Service. For example "http://localhost:5220/"
+
+    "loggingServiceURL"                            //Address of logging service. For example "http://localhost:5230/"
+
+    "cacheServiceURL"                              //Address of Cache service. For example "http://localhost:5240/"
+
+    "mqHostName"                    //RabbitMQ IP address. For example "172.26.63.61"
+    "mqPassword"                    //RabbitMQ password. For example "1234qwer"
+    "mqUserName"                    //RabbitMQ user name. For example "user"
+    "mqAliveIPGatherRoutingKey"     //RabbitMQ topic name for alive IP. For example "AliveIPGather"
+    "mqVersionGatherRoutingKey"     //RabbitMQ topic name for Version. For example "VersionGather"
+
+    "neo4jHostName"      //Neo4j IP address. For example "172.26.63.61:7687"    
+    "neo4jUserName"      //Neo4j user name. For example "neo4j"
+    "neo4jPassword"      //Neo4j password. For example "neo4j"
+
+    "redisServerHostName"                          //Address of Redis. For example "172.26.63.61:6379"
+    "cacheServiceTTLAbsoluteExpirationMinutes"     //Configure TTL for Redis. For example "200"
+
+    "elasticHostName"             //Elastic IP address. For example "172.26.63.61:9200"
+    "elasticIndexName":           //Elastic index name for logs. For example "log-versions-information-system"
+
+    "installedVersions": [          //Which versions to check. For example path = "C:\Program Files\Git\", name = git-cmd.exe
+    {
+	  "id": 3,
+	  "path": "\\c$\\Program Files\\Git\\git-bash.exe",
+	  "name": "git_bash",
+	  "configurationId": 1
+	},
+	{
+	  "id": 4,
+	  "path":" \\c$\\Program Files\\Git\\git-cmd.exe",
+	  "name": "git_cmd",
+	  "configurationId": 1
+	}
+    ]
+ 
