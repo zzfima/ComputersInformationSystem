@@ -16,8 +16,10 @@
 "mqAliveIPGatherProducerServiceURL": "http://localhost:5212/",
 
 "toolsInformationSystemSchedulerServiceURL": "http://localhost:5220/",
-"loggingServiceURL": "http://localhost:5221/",
-"cacheServiceURL": "http://localhost:5230/",
+
+"loggingServiceURL": "http://localhost:5230/",
+
+"cacheServiceURL": "http://localhost:5240/",
 
 "CacheServiceTTLAbsoluteExpirationMinutes": 200,
 
@@ -34,7 +36,7 @@
 "redisServerHostName": "192.168.1.1:6379",
 
 "elasticHostName": "http://192.168.1.1:9200",
-"elasticIndexName": "log-tools-information-system",
+"elasticIndexName": "log-versions-information",
 
 "installedVersions": [
 	{

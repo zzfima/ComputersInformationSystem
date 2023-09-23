@@ -62,7 +62,7 @@ Setup config file through ConfigurationSqliteCRUDService http://localhost:5200/s
     "cacheServiceTTLAbsoluteExpirationMinutes"     //Configure TTL for Redis. For example "200"
 
     "elasticHostName"             //Elastic IP address. For example "172.26.63.61:9200"
-    "elasticIndexName":           //Elastic index name for logs. For example "log-versions-information-system"
+    "elasticIndexName":           //Elastic index name for logs. For example "log-versions-information"
 
     "installedVersions": [          //Which versions to check. For example path = "C:\Program Files\Git\", name = git-cmd.exe
     {
