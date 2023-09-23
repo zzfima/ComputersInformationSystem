@@ -21,8 +21,8 @@ public class MQVersionGatherConsumer
     {
         _configuration = configuration;
         Task.Run(async () => await RESTAPIWrapper.SentLogAsync(_configuration, ServiceName, "Initialize"));
-        _phoenixVersionRetriever = new VersionRetriver(_configuration.InstalledVersions.Where(n => n.Name == "Phoenix").FirstOrDefault().Path);
-        _firmwareVersionRetriever = new VersionRetriver(_configuration.InstalledVersions.Where(n => n.Name == "FW").FirstOrDefault().Path);
+        _phoenixVersionRetriever = new VersionRetriver(_configuration.InstalledVersions.Where(n => n.Name == "APP1").FirstOrDefault().Path);
+        _firmwareVersionRetriever = new VersionRetriver(_configuration.InstalledVersions.Where(n => n.Name == "APP2").FirstOrDefault().Path);
         _remoteMachineLiveIP = new RemoteMachineLiveIP();
 
         var factory = new ConnectionFactory { HostName = _configuration.MQHostName };

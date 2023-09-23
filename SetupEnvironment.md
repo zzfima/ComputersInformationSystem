@@ -22,6 +22,8 @@
         1. transport.tcp.port: 9300 
         1. http.port: 9200
         1. network.host: 0.0.0.0
+1. Install Kibana
+    1.   https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-22-04
 
 Setup config file through ConfigurationSqliteCRUDService http://localhost:5200/swagger/index.html :
 
@@ -61,7 +63,7 @@ Setup config file through ConfigurationSqliteCRUDService http://localhost:5200/s
     "redisServerHostName"                          //Address of Redis. For example "172.26.63.61:6379"
     "cacheServiceTTLAbsoluteExpirationMinutes"     //Configure TTL for Redis. For example "200"
 
-    "elasticHostName"             //Elastic IP address. For example "172.26.63.61:9200"
+    "elasticHostName"             //Elastic IP address. For example "http://172.26.63.61:9200"
     "elasticIndexName":           //Elastic index name for logs. For example "log-versions-information"
 
     "installedVersions": [          //Which versions to check. For example path = "C:\Program Files\Git\", name = git-cmd.exe
