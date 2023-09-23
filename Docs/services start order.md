@@ -2,6 +2,7 @@
 1. Redis
 1. neo4j
 1. RabbitMQ
+1. elastic
 
 *addresses of those services shall be used in ConfigurationSqliteCRUDService*
 
