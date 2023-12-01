@@ -66,7 +66,7 @@ using (var serviceScope = _app.Services.CreateScope())
     var configurations = await repo.GetConfigurationsAsync();
     if (configurations.Count != 0)
         configurationSqliteCRUDServiceURL = configurations[0].ConfigurationSqliteCRUDServiceURL;
-    configurationSqliteCRUDServiceURL = "http://localhost:80/";
+    configurationSqliteCRUDServiceURL = "http://localhost:5200/";
 }
 
 _app.Run(configurationSqliteCRUDServiceURL);
