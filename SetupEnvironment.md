@@ -25,6 +25,13 @@
 1. Install Kibana
     1.   https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-22-04
 
+1. Docker
+    1. Click right mouse on project and select: Add->Docker support. Select Linux
+    1. On Linux OS go to solution folder. In our case is */Documents/Sources/ComputersInformationSystem/ComputersInformationSystem*
+    1. Use the following Docker CLI command to build the image by Docker Engine: *sudo docker build -t zzfima/configuration-sqlite-crud-service -f ConfigurationSqliteCRUDService/Dockerfile .* where zzfima/configuration-sqlite-crud-service is <Docker Hub ID>/<Project Name>:<Version>
+    1. Check docker images: *sudo docker images*
+    1. run it locally: *sudo docker run -p 8080:80 zzfima/configuration-sqlite-crud-service*
+
 Setup config file through ConfigurationSqliteCRUDService http://localhost:5200/swagger/index.html :
 
     "id"                            //any number
