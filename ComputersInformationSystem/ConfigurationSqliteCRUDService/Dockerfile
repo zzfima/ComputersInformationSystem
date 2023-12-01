@@ -2,9 +2,6 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-EXPOSE 5200
-
-ENV ASPNETCORE_URLS=http://+:5200
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Debug
@@ -23,5 +20,7 @@ RUN dotnet publish "./ConfigurationSqliteCRUDService.csproj" -c $BUILD_CONFIGURA
 
 FROM base AS final
 WORKDIR /app
+EXPOSE 5200
+ENV ASPNETCORE_URLS=http://+:5200
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "ConfigurationSqliteCRUDService.dll"]
