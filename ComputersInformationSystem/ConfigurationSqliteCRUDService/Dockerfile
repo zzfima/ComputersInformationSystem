@@ -22,7 +22,7 @@ FROM base AS final
 WORKDIR /app
 
 ENV ASPNETCORE_URLS=http://*:5200
-ENV ASPNETCORE_ENVIRONMENT=Development #Add this line.
+ENV ASPNETCORE_ENVIRONMENT=Development
 EXPOSE 5200
 
 COPY --from=publish /app/publish .
