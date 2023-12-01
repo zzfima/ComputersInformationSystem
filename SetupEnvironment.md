@@ -14,7 +14,7 @@
     1. Configuration redis.conf for outside. Bind to ubuntu ip address: bind 127.0.0.1 172.26.63.61
 1. Install neo4j
     1. Install: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-neo4j-on-ubuntu-22-04
-    1. Connect to port 7474
+    1. Connect to port 7474. Default credentials: neo4j/1234
 1. Install elastic
     1. Install: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-ubuntu-22-04
     1. Configuration elasticsearch.yml for outside:
