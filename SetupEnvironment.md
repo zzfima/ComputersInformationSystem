@@ -31,6 +31,12 @@
     1. Use the following Docker CLI command to build the image by Docker Engine: *sudo docker build -t zzfima/configuration-sqlite-crud-service -f ConfigurationSqliteCRUDService/Dockerfile .* where zzfima/configuration-sqlite-crud-service is <Docker Hub ID>/<Project Name>:<Version>
     1. Check docker images: *sudo docker images*
     1. run it locally: *sudo docker run -p 8080:80 zzfima/configuration-sqlite-crud-service*
+    1. Commands:
+        1. docker container ls -a
+        1. docker image ls
+        1. docker container rm <container_id>
+        1. docker image rm <image_id>
+        1. docker rmi -f <image_id>
 
 Setup config file through ConfigurationSqliteCRUDService http://localhost:5200/swagger/index.html :
 
