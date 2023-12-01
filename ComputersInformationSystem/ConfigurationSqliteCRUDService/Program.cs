@@ -19,10 +19,11 @@ if (_app.Environment.IsDevelopment())
 {
     _app.UseSwagger();
     _app.UseSwaggerUI();
-    using var scope = _app.Services.CreateScope();
-    var dbService = scope.ServiceProvider.GetRequiredService<ConfigurationDB>();
-    dbService.Database.EnsureCreated();
 }
+
+using var scope = _app.Services.CreateScope();
+var dbService = scope.ServiceProvider.GetRequiredService<ConfigurationDB>();
+dbService.Database.EnsureCreated();
 
 #region REST API
 //Get all configurations
