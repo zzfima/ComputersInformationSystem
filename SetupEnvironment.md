@@ -11,7 +11,7 @@
 1. Install Redis
     1. Install: https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
     1. Install windows client: https://redis-desktop-manager.software.informer.com/0.7/
-    1. Configuration redis.conf for outside: bind 127.0.0.1 172.26.63.61
+    1. Configuration redis.conf for outside. Bind to ubuntu ip address: bind 127.0.0.1 172.26.63.61
 1. Install neo4j
     1. Install: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-neo4j-on-ubuntu-22-04
     1. Connect to port 7474
