@@ -71,4 +71,4 @@ using (var serviceScope = _app.Services.CreateScope())
 }
 
 _app.UseHttpsRedirection();
-_app.Run();
+_app.Run(configurationSqliteCRUDServiceURL);
