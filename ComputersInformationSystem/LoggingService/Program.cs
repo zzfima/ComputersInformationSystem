@@ -40,5 +40,7 @@ _app.MapPost("/log/{sender}/{message}", async (ILogWriter logWriter, string send
     .WithTags("POST");
 #endregion
 
-_app.Run(_configuration?.LoggingServiceURL);
+Console.WriteLine($"Run service on {_configuration?.LoggingServiceURL}");
+
 _app.UseHttpsRedirection();
+_app.Run();
