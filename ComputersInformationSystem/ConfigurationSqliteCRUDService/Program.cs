@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Configuration;
+
 var _builder = WebApplication.CreateBuilder(args);
 
 _builder.Services.AddDbContext<ConfigurationDB>(options =>
@@ -69,6 +71,8 @@ using (var serviceScope = _app.Services.CreateScope())
     else
         configurationSqliteCRUDServiceURL = "http://localhost:5200/";
 }
+
+Console.WriteLine($"Run service on {configurationSqliteCRUDServiceURL}");
 
 _app.UseHttpsRedirection();
 _app.Run();
