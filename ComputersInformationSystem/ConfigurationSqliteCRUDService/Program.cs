@@ -70,5 +70,5 @@ using (var serviceScope = _app.Services.CreateScope())
         configurationSqliteCRUDServiceURL = "http://localhost:5200/";
 }
 
-_app.Run(configurationSqliteCRUDServiceURL);
 _app.UseHttpsRedirection();
+_app.Run();
