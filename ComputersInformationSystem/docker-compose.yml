@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  configurationsqlitecrudservice:
+    image: ${DOCKER_REGISTRY-}configurationsqlitecrudservice
+    build:
+      context: .
+      dockerfile: ConfigurationSqliteCRUDService/Dockerfile
