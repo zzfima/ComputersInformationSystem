@@ -6,3 +6,13 @@ services:
     build:
       context: .
       dockerfile: ConfigurationSqliteCRUDService/Dockerfile
+    ports:
+        - 5200:80
+
+  loggingservice:
+    image: ${DOCKER_REGISTRY-}loggingservice
+    build:
+      context: .
+      dockerfile: LoggingService/Dockerfile
+    ports:
+        - 5230:80
