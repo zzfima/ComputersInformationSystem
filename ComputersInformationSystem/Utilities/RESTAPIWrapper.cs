@@ -2,7 +2,7 @@
 {
     public static class RESTAPIWrapper
     {
-        private const string CONFIGURATION_SERVICE_URL = "http://host.docker.internal:5200/configurations";
+        private const string CONFIGURATION_SERVICE_URL = "http://localhost:5200/configurations";
 
         #region ConfigurationSqliteCRUDService REST API
         public static async Task<IList<Configuration>> GetConfigurationAsync()
