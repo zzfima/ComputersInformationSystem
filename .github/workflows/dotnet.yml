@@ -11,9 +11,10 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: [ self-hosted ]
+    defaults:
+      run:
+        working-directory: ./ComputersInformationSystem
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
