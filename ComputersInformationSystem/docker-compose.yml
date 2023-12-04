@@ -2,17 +2,23 @@ version: '3.4'
 
 services:
   configurationsqlitecrudservice:
+    container_name: configuration-sqlite-crud-service-container
     image: ${DOCKER_REGISTRY-}configurationsqlitecrudservice
     build:
       context: .
       dockerfile: ConfigurationSqliteCRUDService/Dockerfile
     ports:
         - 5200:80
+    networks: 
+        - xyz-network
 
   loggingservice:
+    container_name: logging-service-container
     image: ${DOCKER_REGISTRY-}loggingservice
     build:
       context: .
       dockerfile: LoggingService/Dockerfile
     ports:
         - 5230:80
+    networks: 
+        - xyz-network
