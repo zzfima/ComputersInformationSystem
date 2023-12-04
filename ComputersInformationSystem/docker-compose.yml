@@ -22,3 +22,7 @@ services:
         - 5230:80
     networks: 
         - xyz-network
+
+networks:
+  xyz-network:
+    driver: "bridge"
