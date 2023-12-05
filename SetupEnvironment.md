@@ -9,8 +9,8 @@
 1. Docker install: https://docs.docker.com/engine/install/ubuntu/ 
 1. Install RabbitMQ: https://www.cherryservers.com/blog/how-to-install-and-start-using-rabbitmq-on-ubuntu-22-04
     1. Set user for access from outside: https://stackoverflow.com/questions/23669780/rabbitmq-3-3-1-can-not-login-with-guest-guest
-    1. Using docker run daemon: *sudo docker run rabbitmq*
-    1. Using docker run manager: *sudo docker run --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:management*
+    1. Using docker run daemon: *sudo docker run -d rabbitmq*
+    1. Using docker run manager: *sudo docker run -d --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:management*
 1. Install Redis
     1. Install: https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
     1. Install windows client: https://redis-desktop-manager.software.informer.com/0.7/
@@ -18,7 +18,7 @@
 1. Install neo4j
     1. Install: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-neo4j-on-ubuntu-22-04
     1. Connect to port 7474. Default credentials: neo4j/1234
-    1. Using docker: *sudo docker run --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data neo4j* 
+    1. Using docker: *sudo docker run -d --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data neo4j* 
 1. Install elastic
     1. Install: https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-ubuntu-22-04
     1. Configuration elasticsearch.yml for outside:
