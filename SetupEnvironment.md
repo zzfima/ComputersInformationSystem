@@ -10,8 +10,8 @@
 1. Install RabbitMQ: https://www.cherryservers.com/blog/how-to-install-and-start-using-rabbitmq-on-ubuntu-22-04
     1. Set user for access from outside: https://stackoverflow.com/questions/23669780/rabbitmq-3-3-1-can-not-login-with-guest-guest
     2. Rabbit mq using dockers:
-    	3. Pull and run deamon: sudo docker run rabbitmq
-     	4. Pull and run manager: sudo docker run --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:management
+    3. Pull and run deamon: sudo docker run rabbitmq
+    4. Pull and run manager: sudo docker run --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:management
 1. Install Redis
     1. Install: https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04
     1. Install windows client: https://redis-desktop-manager.software.informer.com/0.7/
