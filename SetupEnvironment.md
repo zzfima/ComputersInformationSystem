@@ -6,7 +6,8 @@
         1. For enabling virtualization on windows home edition: https://www.makeuseof.com/tag/create-virtual-machine-using-windows-10-hyper-v/
 1. Ubuntu after installation
     1. Install xrdp server for remote desktop: https://www.digitalocean.com/community/tutorials/how-to-enable-remote-desktop-protocol-using-xrdp-on-ubuntu-22-04
-1. Docker install: https://docs.docker.com/engine/install/ubuntu/ 
+1. Docker install: https://docs.docker.com/engine/install/ubuntu/
+2. How can I use Docker without sudo? *sudo setfacl -m user:$USER:rw /var/run/docker.sock*  
 1. Install RabbitMQ: https://www.cherryservers.com/blog/how-to-install-and-start-using-rabbitmq-on-ubuntu-22-04
     1. Set user for access from outside: https://stackoverflow.com/questions/23669780/rabbitmq-3-3-1-can-not-login-with-guest-guest
     1. Using docker run daemon: *sudo docker run -d rabbitmq*
