@@ -22,4 +22,4 @@ RUN dotnet publish "./MQAliveIPGatherConsumerService.csproj" -c $BUILD_CONFIGURA
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MQAliveIPGatherConsumerService.exe"]
+ENTRYPOINT ["dotnet", "run"]
