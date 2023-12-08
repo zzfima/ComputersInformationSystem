@@ -28,6 +28,8 @@
         1. transport.tcp.port: 9300 
         1. http.port: 9200
         1. network.host: 0.0.0.0
+    1. Docker pull: *docker pull docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
+    2. Docker run: *docker run -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
 1. Install Kibana
     1.   https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-22-04
 
