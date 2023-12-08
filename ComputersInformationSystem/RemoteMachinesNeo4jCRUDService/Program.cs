@@ -101,5 +101,7 @@ _app.MapPost("/remoteMachine", async ([FromBody] RemoteMachine remoteMachine) =>
 
 await RESTAPIWrapper.SentLogAsync(_configuration, ServiceName, "Service start");
 
+Console.WriteLine($"Run service on {_configuration?.RemoteMachinesNeo4jCRUDServiceURL}");
+
 _app.UseHttpsRedirection();
-_app.Run(_configuration?.RemoteMachinesNeo4jCRUDServiceURL);
+_app.Run();
