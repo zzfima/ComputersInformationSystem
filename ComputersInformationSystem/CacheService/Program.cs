@@ -57,8 +57,12 @@ _app.MapPost("/ip/{address}/{isAlive}", async (IDistributedCache distributedCach
 await WarmCache();
 
 await RESTAPIWrapper.SentLogAsync(_configuration, ServiceName, "Service start");
-_app.Run(_configuration?.CacheServiceURL);
+
+Console.WriteLine($"Run service on {_configuration?.CacheServiceURL}");
+
 _app.UseHttpsRedirection();
+_app.Run();
+
 
 async Task WarmCache()
 {
