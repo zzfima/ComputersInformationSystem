@@ -33,7 +33,7 @@ Important: docker containers use a network address for communication. In this ex
     1. *docker build -t zzfima/remote-machines-neo4j-crud-service -f RemoteMachinesNeo4jCRUDService/Dockerfile .*
     2. *docker run -d -p 5202:80 zzfima/remote-machines-neo4j-crud-service*
 1. RemoteMachinesSQLiteCRUDService
-    1. *docker build -t zzfima/remote-machines-sqlite-crud-service -f RemoteMachinesSQLiteCRUDService/Dockerfile .*
+    1. *docker build -t zzfima/remote-machines-sqlite-crud-service -f RemoteMachinesSqliteCRUDService/Dockerfile .*
     2. *docker run -d -p 5201:80 zzfima/remote-machines-sqlite-crud-service*
 1. IPsSQLiteCRUDService
 1. CacheService
