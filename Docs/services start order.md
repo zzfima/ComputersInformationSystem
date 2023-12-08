@@ -39,6 +39,8 @@ Important: docker containers use a network address for communication. In this ex
     1. *docker build -t zzfima/ips-sqlite-crud-service -f IPsSQLiteCRUDService/Dockerfile .*
     2. *docker run -d -p 5203:80 zzfima/ips-sqlite-crud-service*
 1. CacheService
+    1. *docker build -t zzfima/cache-service -f CacheService/Dockerfile .*
+    2. *docker run -d -p 5240:80 zzfima/cache-service*
 
 ### MQ producers/consumers services:
 1. MQAliveIPGatherConsumerService
