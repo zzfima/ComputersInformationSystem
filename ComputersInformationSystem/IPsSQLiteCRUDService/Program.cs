@@ -92,5 +92,8 @@ _app.MapPut("/IP", async ([FromBody] IP ip, IIPRepository repo) =>
 #endregion
 
 await RESTAPIWrapper.SentLogAsync(_configuration, ServiceName, "Service start");
-_app.Run(_configuration?.IPsSqliteCRUDServiceURL);
+
+Console.WriteLine($"Run service on {_configuration?.IPsSqliteCRUDServiceURL}");
+
 _app.UseHttpsRedirection();
+_app.Run();
