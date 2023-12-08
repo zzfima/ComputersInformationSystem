@@ -14,10 +14,7 @@ COPY . .
 WORKDIR "/src/MQAliveIPGatherConsumerService"
 RUN dotnet build "./MQAliveIPGatherConsumerService.csproj" -c Release -o out
 
-FROM build AS publish
-RUN dotnet publish "./MQAliveIPGatherConsumerService.csproj" -c Release -o out
-
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/out .
+COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "CacheService.dll"]
