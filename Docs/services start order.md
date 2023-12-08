@@ -1,4 +1,7 @@
 ## Order of starting supporting services
+
+Important: docker containers use a network address for communication. In this example, we use 172.22.148.100. The same address can be received by typing *ifconfig* and check *eth0*
+
 1. Redis
     1. *sudo docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server*
 1. neo4j
@@ -9,10 +12,10 @@
 1. elastic
     1. *docker network create elastic*
     2. *docker pull docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
-    3. *docker run --name es01-test --net elastic -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
+    3. *docker run --name es01-test --net elastic -p 172.22.148.100:9200:9200 -p 172.22.148.100:9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
 1. kibana
     1. *docker pull docker.elastic.co/kibana/kibana:7.17.15*
-    2. *docker run --name kib01-test --net elastic -p 127.0.0.1:5601:5601 -e "ELASTICSEARCH_HOSTS=http://es01-test:9200" docker.elastic.co/kibana/kibana:7.17.15*
+    2. *docker run --name kib01-test --net elastic -p 172.22.148.100:5601:5601 -e "ELASTICSEARCH_HOSTS=http://es01-test:9200" docker.elastic.co/kibana/kibana:7.17.15*
 
 ## Order of starting 'ComputersInformationSystem' services
 
