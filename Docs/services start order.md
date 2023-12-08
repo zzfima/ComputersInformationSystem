@@ -36,6 +36,8 @@ Important: docker containers use a network address for communication. In this ex
     1. *docker build -t zzfima/remote-machines-sqlite-crud-service -f RemoteMachinesSqliteCRUDService/Dockerfile .*
     2. *docker run -d -p 5201:80 zzfima/remote-machines-sqlite-crud-service*
 1. IPsSQLiteCRUDService
+    1. *docker build -t zzfima/ips-sqlite-crud-service -f IPsSQLiteCRUDService/Dockerfile .*
+    2. *docker run -d -p 5203:80 zzfima/ips-sqlite-crud-service*
 1. CacheService
 
 ### MQ producers/consumers services:
