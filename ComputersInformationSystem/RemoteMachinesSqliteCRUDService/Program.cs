@@ -118,5 +118,8 @@ _app.MapPut("/remoteMachine", async ([FromBody] RemoteMachine remoteMachine, IRe
 #endregion
 
 await RESTAPIWrapper.SentLogAsync(_configuration, ServiceName, "Service start");
-_app.Run(_configuration?.RemoteMachinesSqliteCRUDServiceURL);
+
+Console.WriteLine($"Run service on {_configuration?.RemoteMachinesSqliteCRUDServiceURL}");
+
 _app.UseHttpsRedirection();
+_app.Run();
