@@ -2,7 +2,8 @@
 {
     public static class RESTAPIWrapper
     {
-        private const string CONFIGURATION_SERVICE_URL = "http://configuration-sqlite-crud-service-container:80/configurations";
+        //private const string CONFIGURATION_SERVICE_URL = "http://configuration-sqlite-crud-service-container:80/configurations";
+        private const string CONFIGURATION_SERVICE_URL = "http://localhost:5200/configurations";
 
         #region ConfigurationSqliteCRUDService REST API
         public static async Task<IList<Configuration>> GetConfigurationAsync()
