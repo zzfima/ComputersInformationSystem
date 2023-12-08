@@ -50,7 +50,7 @@ Important: docker containers use a network address for communication. In this ex
 1. MQVersionGatherConsumerService
 1. MQVersionGatherProducerService
     1. *docker build -t zzfima/mq-version-gather-producer-service -f MQVersionGatherProducerService/Dockerfile .*
-    2. *docker run -d -p 5211:80 zzfima/mq-version-gather-producer-service* 
+    2. *docker run -d -p 5210:80 zzfima/mq-version-gather-producer-service* 
 
 ### Scheduler service:
 1. ToolsInformationSystemSchedulerService
