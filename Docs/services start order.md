@@ -7,7 +7,12 @@
     1. *sudo docker run -d rabbitmq*
     2. *sudo docker run -d --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:management*
 1. elastic
-    1. *docker run -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
+    1. *docker network create elastic*
+    2. *docker pull docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
+    3. *docker run --name es01-test --net elastic -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
+1. kibana
+    1. *docker pull docker.elastic.co/kibana/kibana:7.17.15*
+    2. *docker run --name kib01-test --net elastic -p 127.0.0.1:5601:5601 -e "ELASTICSEARCH_HOSTS=http://es01-test:9200" docker.elastic.co/kibana/kibana:7.17.15*
 
 ## Order of starting 'ComputersInformationSystem' services
 
