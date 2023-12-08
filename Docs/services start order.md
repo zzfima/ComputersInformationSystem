@@ -24,13 +24,13 @@ Important: docker containers use a network address for communication. In this ex
 ### Data Tier services:
 1. ConfigurationSqliteCRUDService
     1. *docker build -t zzfima/configuration-sqlite-crud-service -f ConfigurationSqliteCRUDService/Dockerfile .* 
-    2. *docker run -d  -p 5200:80 zzfima/configuration-sqlite-crud-service*
+    2. *docker run -d -p 5200:80 zzfima/configuration-sqlite-crud-service*
 1. LoggingService
     1. *docker build -t zzfima/logging-service -f LoggingService/Dockerfile .*
-    2. *docker run -p 5230:80 zzfima/logging-service*
+    2. *docker run -d -p 5230:80 zzfima/logging-service*
 1. RemoteMachinesNeo4jCRUDService
-    2. *docker build -t zzfima/remote-machines-neo4j-crud-service -f RemoteMachinesNeo4jCRUDService/Dockerfile .*
-    3. *docker run -p 5202:80 zzfima/remote-machines-neo4j-crud-service*
+    1. *docker build -t zzfima/remote-machines-neo4j-crud-service -f RemoteMachinesNeo4jCRUDService/Dockerfile .*
+    2. *docker run -d -p 5202:80 zzfima/remote-machines-neo4j-crud-service*
 1. RemoteMachinesSQLiteCRUDService
 1. IPsSQLiteCRUDService
 1. CacheService
