@@ -45,6 +45,8 @@
         1. docker container rm <container_id>
         1. docker image rm <image_id>
         1. docker rmi -f <image_id>
+	1. run terminal on container where is 07260139810f container id: *docker exec -it 07260139810f /bin/bash*
+        1. check logs of container 07260139810f: *docker logs 07260139810f*
 
 Setup config file through ConfigurationSqliteCRUDService http://localhost:5200/swagger/index.html :
 
