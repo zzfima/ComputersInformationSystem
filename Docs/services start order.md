@@ -1,17 +1,25 @@
 ## Order of starting supporting services
 1. Redis
+    1. *sudo docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server*
 1. neo4j
+    1. *docker run -d --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data neo4j*
 1. RabbitMQ
+    1. *sudo docker run -d rabbitmq*
+    2. *sudo docker run -d --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:management*
 1. elastic
-
-*addresses of those services shall be used in ConfigurationSqliteCRUDService*
-
+    1. *docker run -p 127.0.0.1:9200:9200 -p 127.0.0.1:9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
 
 ## Order of starting 'ComputersInformationSystem' services
 
+*for building dockers go to: *..ComputersInformationSystem/ComputersInformationSystem*
+
 ### Data Tier services:
 1. ConfigurationSqliteCRUDService
+    1. *docker build -t zzfima/configuration-sqlite-crud-service -f ConfigurationSqliteCRUDService/Dockerfile .* 
+    2. *docker run -d  -p 5200:80 zzfima/configuration-sqlite-crud-service*
 1. LoggingService
+    1. *docker build -t zzfima/logging-service -f LoggingService/Dockerfile .*
+    2. *docker run -p 5230:80 zzfima/logging-service*
 1. RemoteMachinesNeo4jCRUDService
 1. RemoteMachinesSQLiteCRUDService
 1. IPsSQLiteCRUDService
