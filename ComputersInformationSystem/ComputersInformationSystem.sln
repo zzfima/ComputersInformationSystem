@@ -35,8 +35,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AliveIPGather", "AliveIPGather\AliveIPGather.csproj", "{27E5513D-F7EC-4A3F-ACB1-164024C96233}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8EF1403F-A461-4AA1-A508-88930693AEB4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,10 +105,6 @@ Global
 		{27E5513D-F7EC-4A3F-ACB1-164024C96233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27E5513D-F7EC-4A3F-ACB1-164024C96233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27E5513D-F7EC-4A3F-ACB1-164024C96233}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8EF1403F-A461-4AA1-A508-88930693AEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8EF1403F-A461-4AA1-A508-88930693AEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8EF1403F-A461-4AA1-A508-88930693AEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EF1403F-A461-4AA1-A508-88930693AEB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
