@@ -17,9 +17,9 @@ RUN dotnet build "./MQAliveIPGatherConsumerService.csproj" -c $BUILD_CONFIGURATI
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./MQAliveIPGatherConsumerService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./MQAliveIPGatherConsumerService.csproj" -c $BUILD_CONFIGURATION -o out /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=publish /app/out .
 ENTRYPOINT ["dotnet", "CacheService.dll"]
