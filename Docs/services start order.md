@@ -29,6 +29,8 @@ Important: docker containers use a network address for communication. In this ex
     1. *docker build -t zzfima/logging-service -f LoggingService/Dockerfile .*
     2. *docker run -p 5230:80 zzfima/logging-service*
 1. RemoteMachinesNeo4jCRUDService
+    2. *docker build -t zzfima/remote-machines-neo4j-crud-service -f RemoteMachinesNeo4jCRUDService/Dockerfile .*
+    3. *docker run -p 5202:80 zzfima/remote-machines-neo4j-crud-service*
 1. RemoteMachinesSQLiteCRUDService
 1. IPsSQLiteCRUDService
 1. CacheService
