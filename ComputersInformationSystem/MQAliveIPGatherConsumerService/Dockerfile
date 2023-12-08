@@ -12,9 +12,9 @@ COPY ["Entities/Entities.csproj", "Entities/"]
 RUN dotnet restore "./MQAliveIPGatherConsumerService/./MQAliveIPGatherConsumerService.csproj"
 COPY . .
 WORKDIR "/src/MQAliveIPGatherConsumerService"
-RUN dotnet build "./MQAliveIPGatherConsumerService.csproj" -c Release -o out
+RUN dotnet publish "./MQAliveIPGatherConsumerService.csproj" -c Release -o out
 
-FROM base AS final
+FROM build AS final
 WORKDIR /app
 COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "CacheService.dll"]
