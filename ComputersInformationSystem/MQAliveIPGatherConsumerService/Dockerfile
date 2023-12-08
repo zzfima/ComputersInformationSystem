@@ -4,7 +4,6 @@ FROM mcr.microsoft.com/dotnet/runtime:7.0 AS base
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["MQAliveIPGatherConsumerService/MQAliveIPGatherConsumerService.csproj", "MQAliveIPGatherConsumerService/"]
 COPY ["AliveIPGather/AliveIPGather.csproj", "AliveIPGather/"]
@@ -13,11 +12,10 @@ COPY ["Entities/Entities.csproj", "Entities/"]
 RUN dotnet restore "./MQAliveIPGatherConsumerService/./MQAliveIPGatherConsumerService.csproj"
 COPY . .
 WORKDIR "/src/MQAliveIPGatherConsumerService"
-RUN dotnet build "./MQAliveIPGatherConsumerService.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./MQAliveIPGatherConsumerService.csproj" -c Release -o out
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./MQAliveIPGatherConsumerService.csproj" -c $BUILD_CONFIGURATION -o out /p:UseAppHost=false
+RUN dotnet publish "./MQAliveIPGatherConsumerService.csproj" -c Release -o out
 
 FROM base AS final
 WORKDIR /app
