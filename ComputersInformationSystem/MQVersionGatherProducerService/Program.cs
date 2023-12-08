@@ -44,5 +44,8 @@ _app.MapPost("/Publish/{ip}", async (string ip, IMessageQueueProducer mqService)
     .WithTags("POST");
 
 await RESTAPIWrapper.SentLogAsync(_configuration, ServiceName, "Service start");
-_app.Run(_configuration?.MQVersionGatherProducerServiceURL);
+
+Console.WriteLine($"Run service on {_configuration?.MQVersionGatherProducerServiceURL}");
+
 _app.UseHttpsRedirection();
+_app.Run();
