@@ -46,11 +46,13 @@ Important: docker containers use a network address for communication. In this ex
 ### MQ producers/consumers services:
 1. MQAliveIPGatherConsumerService
     1. *docker build -t zzfima/mq-alive-ip-gather-consumer-service -f MQAliveIPGatherConsumerService/Dockerfile .*
-    2. *docker run -d zzfima/mq-alive-ip-gather-consumer-service* 
+    2. *docker run -d -i zzfima/mq-alive-ip-gather-consumer-service* 
 1. MQAliveIPGatherProducerService
     1. *docker build -t zzfima/mq-alive-ip-gather-producer-service -f MQAliveIPGatherProducerService/Dockerfile .*
     2. *docker run -d -p 5211:80 zzfima/mq-alive-ip-gather-producer-service* 
 1. MQVersionGatherConsumerService
+    1. *docker build -t zzfima/mq-version-gather-consumer-service -f MQVersionGatherConsumerService/Dockerfile .*
+    2. *docker run -d -i zzfima/mq-version-gather-consumer-service* 
 1. MQVersionGatherProducerService
     1. *docker build -t zzfima/mq-version-gather-producer-service -f MQVersionGatherProducerService/Dockerfile .*
     2. *docker run -d -p 5210:80 zzfima/mq-version-gather-producer-service* 
