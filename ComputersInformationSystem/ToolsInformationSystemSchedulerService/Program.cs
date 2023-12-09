@@ -66,8 +66,12 @@ _app.MapPost("/stopScheduling", () =>
 #endregion
 
 await RESTAPIWrapper.SentLogAsync(_configuration, ServiceName, "Service start");
-_app.Run(_configuration?.ToolsInformationSystemSchedulerServiceURL);
+
+Console.WriteLine($"Run service on {_configuration?.ToolsInformationSystemSchedulerServiceURL}");
+
 _app.UseHttpsRedirection();
+_app.Run();
+
 
 void DiscoverMachines(object? state)
 {
