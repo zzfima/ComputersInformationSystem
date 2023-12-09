@@ -59,3 +59,5 @@ Important: docker containers use a network address for communication. In this ex
 
 ### Scheduler service:
 1. ToolsInformationSystemSchedulerService
+    1. *docker build -t zzfima/tools-information-system-scheduler-service -f ToolsInformationSystemSchedulerService/Dockerfile .*
+    2. *docker run -d -p 5220:80 zzfima/cache-service*
