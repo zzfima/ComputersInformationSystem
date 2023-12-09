@@ -9,6 +9,7 @@ Important: docker containers use a network address for communication. In this ex
 1. RabbitMQ
     1. *sudo docker run -d rabbitmq*
     2. *sudo docker run -d --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:management*
+    3. Go to http://172.22.148.100:15672/#/users/guest, Set Permission
 1. elastic
     1. *docker network create elastic*
     2. *docker pull docker.elastic.co/elasticsearch/elasticsearch:7.17.15*
