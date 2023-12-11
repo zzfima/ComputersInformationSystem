@@ -31,6 +31,7 @@ Important: docker containers use a network address for communication. In this ex
 1. LoggingService
     1. *docker build -t zzfima/logging-service -f LoggingService/Dockerfile .*
     2. *docker run -d -p 5230:80 zzfima/logging-service*
+    3. Running not from docker: *dotnet run --urls=http://172.22.148.100:5230*
 1. RemoteMachinesNeo4jCRUDService
     1. *docker build -t zzfima/remote-machines-neo4j-crud-service -f RemoteMachinesNeo4jCRUDService/Dockerfile .*
     2. *docker run -d -p 5202:80 zzfima/remote-machines-neo4j-crud-service*
