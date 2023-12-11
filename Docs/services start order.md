@@ -26,7 +26,8 @@ Important: docker containers use a network address for communication. In this ex
 1. ConfigurationSqliteCRUDService
     1. *docker build -t zzfima/configuration-sqlite-crud-service -f ConfigurationSqliteCRUDService/Dockerfile .* 
     2. *docker run -d -p 5200:80 zzfima/configuration-sqlite-crud-service*
-    3. After starting ConfigurationSqliteCRUDService PUT configuration file
+    3. Running not from docker: *dotnet run  --urls=http://172.22.148.100:5200*
+    4. After starting ConfigurationSqliteCRUDService PUT configuration file
 1. LoggingService
     1. *docker build -t zzfima/logging-service -f LoggingService/Dockerfile .*
     2. *docker run -d -p 5230:80 zzfima/logging-service*
