@@ -5,7 +5,7 @@ Important: docker containers use a network address for communication. In this ex
 1. Redis
     1. *sudo docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server*
 1. neo4j
-    1. *docker run -d --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data neo4j*
+    1. *docker run -p7474:7474 -p7687:7687 -d -v $HOME/neo4j/data:/data -v $HOME/neo4j/logs:/logs -v $HOME/neo4j/import:/var/lib/neo4j/import -v $HOME/neo4j/plugins:/plugins --env NEO4J_AUTH=neo4j/neo4j1234 neo4j:latest*
 1. RabbitMQ
     1. *sudo docker run -d rabbitmq*
     2. *sudo docker run -d --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:management*
