@@ -36,7 +36,7 @@ _app.MapPost("/startScheduling", () =>
     var discoverFrequencyMinutes = _configuration.DiscoverFrequencyMinutes;
     var updateFrequencyMinutes = _configuration.UpdateFrequencyMinutes;
 
-    //currently whant only discover
+    //currently want only discover
     _updateTimer = new Timer(UpdateMachines, null, 1000, updateFrequencyMinutes * 60 * 1000);
     _discoverTimer = new Timer(DiscoverMachines, null, 1000, discoverFrequencyMinutes * 60 * 1000);
 
